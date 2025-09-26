@@ -36,3 +36,18 @@ models:
           - not_null
           - no_negative
 
+  - name: orders_per_month_incremental
+    description: "Incremental version of monthly order counts. Appends new data when sales_data refreshes."
+    columns:
+      - name: order_month
+        description: "Month of the orders (YYYY-MM-DD)."
+        tests:
+          - not_null
+          - unique
+      - name: orders_count
+        description: "Number of orders aggregated incrementally."
+        tests:
+          - not_null
+          - expression_is_non_negative
+
+
