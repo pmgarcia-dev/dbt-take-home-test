@@ -1,0 +1,25 @@
+# models/schema.yml
+version: 2
+
+sources:
+  - name: neon_source
+    database: neondb
+    schema: public
+    tables:
+      - name: sales_data
+
+models:
+  - name: customer_sales
+    description: "Total sales amount per customer. Built from source: neon_source.sales_data"
+    columns:
+      - name: customer_id
+        description: "Customer identifier (aggregated level)."
+        tests:
+          - not_null  
+          - unique
+      - name: total_sales
+        description: "Total sales amount (sum of amount) for each customer."
+        tests:
+          - not_null
+          - expression_is_positive
+
