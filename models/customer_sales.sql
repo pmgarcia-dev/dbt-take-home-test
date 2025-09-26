@@ -8,3 +8,4 @@ select
   sum(amount) as total_sales
 from {{ source('neon_source', 'sales_data') }}
 group by customer_id
+order by customer_id

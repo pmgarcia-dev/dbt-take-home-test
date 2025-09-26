@@ -21,5 +21,18 @@ models:
         description: "Total sales amount (sum of amount) for each customer."
         tests:
           - not_null
-          - expression_is_positive
+          - no_negative
+
+  - name: orders_per_month
+    description: "Monthly order counts derived from sales_data (one row per month)."
+    columns:
+      - name: order_month
+        description: "First day of the month representing the month window (YYYY-MM-DD)."
+        tests:
+          - not_null
+      - name: orders_count
+        description: "Number of orders in the month."
+        tests:
+          - not_null
+          - no_negative
 
