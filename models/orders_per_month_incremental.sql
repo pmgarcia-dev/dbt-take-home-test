@@ -11,12 +11,13 @@ with new_orders as (
     select
         date_trunc('month', order_date)::date as order_month,
         count(*) as orders_count
-    from {{ source('snowflake_source', 'sales_data') }}
+    from {{ source('snowflake', 'sales_data') }}
     {% if is_incremental() %}
         -- Only process sales newer than the latest month already in the table
         where date_trunc('month', order_date) > (select max(order_month) from {{ this }})
     {% endif %}
     group by order_month
+    order by order_month
 )
 
 select *

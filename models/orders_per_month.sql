@@ -6,6 +6,6 @@
 select
   date_trunc('month', order_date)::date as order_month,
   count(*) as orders_count
-from {{ source('neon_source', 'sales_data') }}
+from {{ source('snowflake', 'sales_data') }}
 group by order_month
 order by order_month

@@ -2,8 +2,8 @@
 version: 2
 
 sources:
-  - name: neon_source
-    database: neondb
+  - name: snowflake
+    database: analytics
     schema: public
     tables:
       - name: sales_data

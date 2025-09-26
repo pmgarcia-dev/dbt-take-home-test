@@ -6,6 +6,6 @@
 select
   customer_id,
   sum(amount) as total_sales
-from {{ source('neon_source', 'sales_data') }}
+from {{ source('snowflake', 'sales_data') }}
 group by customer_id
 order by customer_id
