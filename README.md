@@ -14,21 +14,21 @@ This project demonstrates a simple data transformation workflow using **dbt** an
 ## Project Structure
 
 dbt-take-home-test/
-├── analyses/ # Placeholder for dbt analyses
+├── analyses/                 # Placeholder for dbt analyses
 ├── macros/
-│ └── test_no_negative.sql # Custom macro for no negative values
+│   └── test_no_negative.sql  # Custom macro for no negative values
 ├── models/
-│ └── marts/ # Develop models
-│ ├── customer_sales.sql
-│ ├── orders_per_month.sql
-│ ├── orders_per_month_incremental.sql
-│ └── schema.yml # Source definitions and model documentation
-├── seeds/
-├── snapshots/
-├── tests/ # Custom tests for models integrity. 
-│ ├── customer_sales_no_negative.sql
-│ └── orders_per_month_no_negative.sql
-├── dbt_project.yml # Project configuration and materializations
+│   └── marts/                # Developed models
+│       ├── customer_sales.sql
+│       ├── orders_per_month.sql
+│       ├── orders_per_month_incremental.sql
+│       └── schema.yml        # Source definitions and model documentation
+├── seeds/                    # Optional CSV seeds if needed
+├── snapshots/                # Optional dbt snapshots
+├── tests/                    # Custom tests for models integrity
+│   ├── customer_sales_no_negative.sql
+│   └── orders_per_month_no_negative.sql
+├── dbt_project.yml           # Project configuration and materializations
 └── README.md
 
 ## Resources:
