@@ -1,0 +1,61 @@
+# models/marts/schema.yml
+version: 2
+
+sources:
+  - name: snowflake
+    database: analytics
+    schema: public
+    tables:
+      - name: sales_data
+        description: "Raw sales orders data ingested into Snowflake."
+        columns:
+          - name: order_id
+            description: "Unique order identifier."
+          - name: customer_id
+            description: "Unique customer identifier."
+          - name: order_date
+            description: "Date when the order was placed (YYYY-MM-DD)."
+          - name: amount
+            description: "Represents the transaction value."
+
+models:
+  - name: customer_sales
+    description: "Total sales amount per customer derived from sales_data."
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier."
+        tests:
+          - not_null
+          - unique
+      - name: total_sales
+        description: "Aggregated total sales per customer."
+        tests:
+          - not_null
+          - no_negative
+
+  - name: orders_per_month
+    description: "Monthly order counts derived from sales_data."
+    columns:
+      - name: order_month
+        description: "Month of the orders in YYYY-MM format."
+        tests:
+          - not_null
+      - name: orders_count
+        description: "Number of orders in the given month."
+        tests:
+          - not_null
+          - no_negative
+
+  - name: orders_per_month_incremental
+    description: "Incremental monthly order counts. Refreshes only when new sales_data arrives."
+    columns:
+      - name: order_month
+        description: "Month of the orders in YYYY-MM format."
+        tests:
+          - not_null
+          - unique
+      - name: orders_count
+        description: "Number of orders in the given month."
+        tests:
+          - not_null
+          - no_negative
